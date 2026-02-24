@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frucious Smoothies</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;scroll-behavior:smooth;}
+body{background: linear-gradient(180deg,#ffffff,#fff6f8);overflow-x:hidden;color:#333;}
+/* BLUEBERRY FONT */
+.logo-font{font-family:'Blueberry',cursive;letter-spacing:2px;}
+/* FLOATING FRUITS */
+.floating-fruits{position:fixed;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:-1;}
+.floating-fruits span{position:absolute;font-size:30px;animation:float 18s infinite linear;opacity:0.15;}
+.floating-fruits span:nth-child(1){left:10%;animation-duration:14s;}
+.floating-fruits span:nth-child(2){left:30%;animation-duration:18s;}
+.floating-fruits span:nth-child(3){left:60%;animation-duration:16s;}
+.floating-fruits span:nth-child(4){left:80%;animation-duration:20s;}
+.floating-fruits span:nth-child(5){left:50%;animation-duration:22s;}
+@keyframes float{from{transform:translateY(100vh) rotate(0deg);}to{transform:translateY(-10vh) rotate(360deg);}}
+
+/* NAV */
+nav{position:fixed;width:100%;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);display:flex;justify-content:space-between;padding:15px 40px;box-shadow:0 2px 10px rgba(0,0,0,0.05);z-index:1000;}
+nav h2{color:#ff4d6d;font-family:'Blueberry',cursive;font-size:28px;}
+nav ul{display:flex;gap:20px;list-style:none;}
+nav a{text-decoration:none;color:#333;font-weight:bold;}
+
+/* HERO */
+.hero{height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#ff6a88,#ff99ac);color:white;padding:20px;}
+.hero h1{font-family:'Blueberry',cursive;font-size:60px;letter-spacing:3px;}
+.hero button{margin-top:20px;padding:12px 25px;border:none;background:white;color:#ff4d6d;font-weight:bold;border-radius:30px;cursor:pointer;transition:0.3s;}
+.hero button:hover{transform:scale(1.05);}
+
+/* FLAVORS */
+.flavors{padding:100px 20px;text-align:center;}
+.cards{display:flex;gap:25px;justify-content:center;flex-wrap:wrap;margin-top:40px;}
+.card{background:white;width:260px;padding:25px;border-radius:15px;box-shadow:0 8px 20px rgba(255,77,109,0.08);transition:0.4s;}
+.card:hover{transform:translateY(-10px);box-shadow:0 15px 35px rgba(255,77,109,0.25);}
+.card img{width:100%;border-radius:10px;}
+.card h3{margin:15px 0 10px;}
+.card button{margin-top:10px;padding:10px 20px;border:none;background:#ff4d6d;color:white;border-radius:20px;cursor:pointer;}
+
+/* WHY */
+.why{padding:80px 20px;text-align:center;background:#fff5f7;}
+.why-sub{max-width:600px;margin:15px auto 40px;color:#555;}
+.features{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;}
+.feature{background:white;padding:25px;width:260px;border-radius:15px;box-shadow:0 8px 20px rgba(255,77,109,0.08);transition:0.4s;}
+.feature:hover{transform:translateY(-10px);box-shadow:0 15px 35px rgba(255,77,109,0.25);}
+
+/* FOOTER */
+footer{background:#111;color:white;padding:50px 20px 20px;}
+.footer-container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+footer ul{list-style:none;}
+footer li{margin-bottom:10px;}
+footer a{color:#bbb;text-decoration:none;}
+footer a:hover{color:#ff4d6d;}
+.footer-bottom{text-align:center;margin-top:40px;border-top:1px solid #333;padding-top:15px;color:#777;}
+
+/* POPUP */
+.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;z-index:10000;}
+.popup-content{background:white;padding:30px;border-radius:15px;text-align:center;width:90%;max-width:350px;}
+.popup-content input, .popup-content textarea{width:100%;padding:10px;margin-top:10px;border-radius:10px;border:1px solid #ccc;}
+
+/* ADMIN PANEL */
+.admin-panel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background:#111;color:white;padding:20px;z-index:10001;}
+.admin-panel h2{margin-top:0;}
+.admin-panel button{background:#555;color:white;width:100%;margin:10px 0;padding:12px;}
+.admin-panel button:hover{background:#333;}
+
+/* MOBILE */
+@media(max-width:768px){nav{padding:15px;}.hero h1{font-size:38px;}.footer-container{flex-direction:column;}}
+</style>
+</head>
+<body>
+
+<div class="floating-fruits">
+  <span>🍓</span><span>🥭</span><span>🥝</span><span>🍓</span><span>🥭</span>
+</div>
+
+<nav>
+  <h2>Frucious</h2>
+  <ul>
+    <li><a href="#flavors">Flavors</a></li>
+    <li><a href="#why">About Us</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1>FRUCIOUS</h1>
+    <p style="margin-top:10px;font-size:20px;font-weight:500;">Sip for a better taste.</p>
+    <button onclick="document.getElementById('flavors').scrollIntoView()">View Flavors</button>
+  </div>
+</section>
+
+<section id="flavors" class="flavors">
+  <h2>Our Flavors</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="mango.png">
+      <h3>Mango - ₱59</h3>
+      <button onclick="openPopup('Mango',59)">Order</button>
+    </div>
+    <div class="card">
+      <img src="strawberry.png">
+      <h3>Strawberry - ₱59</h3>
+      <button onclick="openPopup('Strawberry',69)">Order</button>
+    </div>
+    <div class="card">
+      <img src="kiwi.png">
+      <h3>Kiwi - ₱59</h3>
+      <button onclick="openPopup('Kiwi',59)">Order</button>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why">
+  <h2>Why Frucious?</h2>
+  <p class="why-sub">We believe in the power of nature's bounty. Every smoothie tells a story of freshness and flavor.</p>
+  <div class="features">
+    <div class="feature">
+      <h3>🍓 Fresh & Natural</h3>
+      <p>Only the freshest fruits, hand-picked for optimal flavor and nutrition.</p>
+    </div>
+    <div class="feature">
+      <h3>💚 Made with Love</h3>
+      <p>Every smoothie is crafted with care and passion for your well-being.</p>
+    </div>
+    <div class="feature">
+      <h3>🌿 Pure Goodness</h3>
+      <p>No artificial flavors, no preservatives. Just pure, natural ingredients.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <h3>Frucious</h3>
+      <p>Fresh smoothies made with love and natural ingredients.</p>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#why">About Us</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Frucious. All rights reserved.</div>
+</footer>
+
+<!-- ORDER POPUP -->
+<div class="popup" id="orderPopup">
+  <div class="popup-content">
+    <h2 id="productTitle"></h2>
+    <input type="text" id="orderName" placeholder="Full Name">
+    <input type="text" id="orderNumber" placeholder="Contact Number">
+    <textarea id="orderAddress" placeholder="Full Address"></textarea>
+    <button onclick="submitOrder()">Confirm Order</button>
+    <button onclick="closePopup()" style="margin-top:10px;background:#ccc;color:#333;">Cancel</button>
+    <p id="orderMessage" style="color:green;"></p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <h2>Admin Panel</h2>
+  <div id="ordersList"></div>
+  <button onclick="clearOrders()">Clear All Orders</button>
+  <button onclick="closeAdmin()">Close</button>
+</div>
+
+<script>
+let ordersLog = [];
+let currentProduct = '';
+let adminActive = false;
+
+function openPopup(name, price){
+  currentProduct=name;
+  document.getElementById('productTitle').innerText=`Ordering: ${name} - ₱${price}`;
+  document.getElementById('orderPopup').style.display='flex';
+  document.getElementById('orderName').value='';
+  document.getElementById('orderNumber').value='';
+  document.getElementById('orderAddress').value='';
+  document.getElementById('orderMessage').innerText='';
+}
+
+function closePopup(){document.getElementById('orderPopup').style.display='none';}
+
+function submitOrder(){
+  const name=document.getElementById('orderName').value.trim();
+  const number=document.getElementById('orderNumber').value.trim();
+  const address=document.getElementById('orderAddress').value.trim();
+  if(!name||!number||!address){alert('Complete all fields!');return;}
+  ordersLog.push({name,number,address,product:currentProduct,time:new Date().toLocaleString()});
+  document.getElementById('orderMessage').innerText='Your order is being processed 🥤';
+  closePopup();
+  updateAdmin();
+}
+
+/* ADMIN PANEL */
+function updateAdmin(){
+  if(!adminActive) return;
+  const container=document.getElementById('ordersList');
+  container.innerHTML='';
+  ordersLog.forEach(o=>{
+    const div=document.createElement('div');
+    div.style.border='1px solid white';
+    div.style.margin='8px 0';
+    div.style.padding='8px';
+    div.innerHTML=`<strong>${o.name}</strong> | ${o.number} | ${o.address}<br> Product: ${o.product}<br>${o.time}`;
+    container.appendChild(div);
+  });
+}
+
+function clearOrders(){if(confirm('Clear all orders?')){ordersLog=[];updateAdmin();}}
+function showAdmin(){adminActive=true;document.getElementById('adminPanel').style.display='block';updateAdmin();}
+function closeAdmin(){document.getElementById('adminPanel').style.display='none';}
+
+// ADMIN SHORTCUT: Ctrl+Shift+A
+document.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&e.key==='A'){showAdmin();}});
+</script>
+
+</body>
+</html>
